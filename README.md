@@ -2,6 +2,14 @@
 
 Go package that converts XML to JSON
 
+
+### Fork
+
+    This fork is to help with data sent opensearch, setting empty fields to null rather than "". 
+    "" is always interpreted as a string, which can create conflicts when the field should be a 
+    nested object. null is interpreted neutrally for both strings/values and objects, and creates 
+    no conflicts. 
+
 ### Install
 
     go get -u github.com/basgys/goxml2json

@@ -91,7 +91,11 @@ func (enc *Encoder) format(n *Node, lvl int) error {
 
 		enc.write("}")
 	} else {
-		s := sanitiseString(n.Data)
+		if len(n.Data) > 0 {
+			s := sanitiseString(n.Data)
+		} else {
+			s := "null"
+		}
 		if enc.tc == nil {
 			// do nothing
 		} else {
