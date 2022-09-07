@@ -25,6 +25,8 @@ type (
 
 	excluder []string
 
+	emptyIs string
+
 	nodesFormatter struct {
 		list []nodeFormatter
 	}
@@ -124,6 +126,20 @@ func (ex *excluder) AddToEncoder(e *Encoder) *Encoder {
 
 func (ex *excluder) AddToDecoder(d *Decoder) *Decoder {
 	d.ExcludeAttributes([]string((*ex)))
+	return d
+}
+
+func EmptySet(val string) *emptyIs {
+	es := emptyIs(val)
+	return &es
+}
+
+func (ei *emptyIs) AddToEncoder(e *Encoder) *Encoder {
+	e.emptyVal = string(*ei)
+	return e
+}
+
+func (ei *emptyIs) AddToDecoder(d *Decoder) *Decoder {
 	return d
 }
 

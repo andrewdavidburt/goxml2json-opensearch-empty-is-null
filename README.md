@@ -99,6 +99,31 @@ Go package that converts XML to JSON
   }
 ```
 
+**With empty value setting**
+
+```go
+  package main
+
+  import (
+  	"fmt"
+  	"strings"
+
+  	xj "github.com/basgys/goxml2json"
+  )
+
+  func main() {
+  	// xml is an io.Reader
+  	xml := strings.NewReader(`<?xml version="1.0" encoding="UTF-8"?><something></something>`)
+  	json, err := xj.Convert(xml, xj.EmptySet("null"))
+  	if err != nil {
+  		panic("That's embarrassing...")
+  	}
+
+  	fmt.Println(json.String())
+  	// {"price": null}
+  }
+```
+
 ### Contributing
 Feel free to contribute to this project if you want to fix/extend/improve it.
 

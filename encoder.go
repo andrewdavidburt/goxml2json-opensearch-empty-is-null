@@ -13,6 +13,7 @@ type Encoder struct {
 	contentPrefix   string
 	attributePrefix string
 	tc              encoderTypeConverter
+	emptyVal        string
 }
 
 // NewEncoder returns a new encoder that writes to w.
@@ -91,10 +92,11 @@ func (enc *Encoder) format(n *Node, lvl int) error {
 
 		enc.write("}")
 	} else {
+		var s string
 		if len(n.Data) > 0 {
-			s := sanitiseString(n.Data)
+			s = sanitiseString(n.Data)
 		} else {
-			s := "null"
+			s = enc.emptyVal
 		}
 		if enc.tc == nil {
 			// do nothing
